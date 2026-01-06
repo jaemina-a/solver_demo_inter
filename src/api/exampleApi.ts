@@ -34,7 +34,7 @@ export const turnOn = async (): Promise<TurnOnResponse> => {
 };
 
 
-export const turnOff = async (): Promise<TurnOnResponse> => {
+export const turnOff = async (): Promise<any> => {
   try {
     const response = await fetch('https://192.168.0.102/turnoff', {
       method: 'POST',

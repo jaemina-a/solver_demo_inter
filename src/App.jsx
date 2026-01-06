@@ -35,6 +35,7 @@ function App() {
         alert('WAYO에게 양식이 제출되었습니다.');
         /* turnOff API 호출 */
         try {
+          alert('turnoff API호출!!');
           const turnOffResponse = await turnOff();
           console.log('turnOff 응답:', turnOffResponse);
           alert('WAYO가 끄였습니다.');

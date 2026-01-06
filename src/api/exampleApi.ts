@@ -1,0 +1,35 @@
+// 예시 API
+
+export interface TurnOnResponse {
+  status: string;
+  code: number;
+  msg: string;
+}
+
+export const turnOn = async (): Promise<TurnOnResponse> => {
+  try {
+    const response = await fetch('http://192.168.0.102:5000/turnon', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+    console.log('turnOn data:', data);
+
+    if (!response.ok) {
+      throw new Error('turnOn API 호출에 실패했습니다.');
+    }
+
+    return {
+      status: data.status,
+      code: data.code,
+      msg: data.msg,
+    };
+  } catch (error) {
+    console.error('turnOn API 호출 오류:', error);
+    throw error;
+  }
+};
+

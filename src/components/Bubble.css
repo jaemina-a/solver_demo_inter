@@ -1,0 +1,355 @@
+/* ============================================
+   말풍선 스타일 - 모든 bubble 관련 스타일이 여기에 있습니다
+   ============================================ */
+
+/* 기본 말풍선 스타일 */
+.bubble {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 28px; /* 24px -> 28px (약 17% 증가) */
+  margin: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  position: relative;
+  max-width: 480px; /* 400px -> 480px (20% 증가) */
+  animation: fadeInUp 0.5s ease-out;
+  z-index: 11;
+}
+
+.need-bubble {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 24px; /* 24px -> 28px (약 17% 증가) */
+  margin: 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  position: relative;
+  max-width: 500px; /* 320px -> 384px (20% 증가) */
+  min-height: 400px; /* 600px -> 720px (20% 증가) */
+  animation: fadeInUp 0.5s ease-out;
+  box-sizing: border-box; /* padding을 포함한 크기 계산 */
+  display: flex;
+  flex-direction: column; /* 세로 방향 flex */
+}
+
+/* 필요사항 말풍선 - 꼬리가 오른쪽으로 (왼쪽에 배치) */
+.need-bubble::before {
+  display: none; /* 말꼬리 숨김 */
+}
+/* 기본 꼬리 (아래쪽) - 상단 말풍선용 */
+.bubble::before {
+  display: none; /* 말꼬리 숨김 */
+}
+
+/* 왼쪽 말풍선 - 꼬리가 오른쪽으로 */
+.bubble-left::before {
+  display: none; /* 말꼬리 숨김 */
+}
+
+/* 오른쪽 말풍선 - 꼬리가 왼쪽으로 */
+.bubble-right::before {
+  display: none; /* 말꼬리 숨김 */
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bubble-header {
+  border-bottom: none; /* 보조선 제거 */
+
+}
+
+.bubble-header h3 {
+  margin: 0;
+  font-size: 1.3em; /* 1.2em -> 1.3em */
+  color: #333;
+  font-weight: 600;
+}
+
+.bubble-content {
+  margin-top: 12px;
+  flex: 1; /* 남은 공간을 모두 차지 */
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* flex 아이템이 부모보다 작아질 수 있도록 */
+}
+
+/* Source Bubble Styles */
+.source-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.source-select-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1.05em;
+  color: #333;
+  background-color: #f5f5f5;
+  border: 0.5px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.source-select-button:hover {
+  background-color: #eeeeee;
+  border-color: #d0d0d0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.source-select-button.selected {
+  background-color: #fff9e6;
+  border-color: #ffc107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+}
+
+.source-select-button.selected:hover {
+  background-color: #fff8d6;
+  border-color: #ffb300;
+}
+
+.source-select-button span {
+  user-select: none;
+}
+
+.source-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  object-fit: contain;
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+}
+
+/* Position Bubble Styles */
+.position-select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.05em; /* 1em -> 1.05em */
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.position-select:hover {
+  border-color: #646cff;
+}
+
+.position-select:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+}
+
+/* Need Bubble Styles */
+.need-textarea {
+  width: 100%;
+  flex: 1; /* bubble-content의 남은 공간을 모두 차지 */
+  padding: 12px;
+  font-size: 1.05em; /* 1em -> 1.05em */
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: white;
+  color: #333;
+  font-family: inherit;
+  resize: none; /* flex로 높이를 제어하므로 resize 제거 */
+  transition: border-color 0.2s;
+  box-sizing: border-box; /* padding과 border를 width에 포함시켜 오버플로우 방지 */
+  min-height: 0; /* flex 아이템이 부모보다 작아질 수 있도록 */
+}
+
+.need-textarea:hover {
+  border-color: #646cff;
+}
+
+.need-textarea:focus {
+  outline: none;
+  border-color: #646cff;
+  box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+}
+
+.need-textarea::placeholder {
+  color: #999;
+}
+
+/* ============================================
+   연결점 스타일
+   각 점은 나중에 bubble과 연결될 예정입니다.
+   ============================================ */
+
+.point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #ffc107; /* 노란색 */
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.4);
+  z-index: 10;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* 상단 점 - bubble-top과 연결될 예정 */
+/*노트북*/
+.point-top {
+  top: 275px;        /* bubble-top과 같은 top 위치 */
+  left: 53%;        /* bubble-top과 같은 left 위치 */
+  transform: translateX(-50%);
+}
+
+/* 왼쪽 점 - bubble-left와 연결될 예정 */
+.point-left {
+  left: 480px;       /* bubble-left와 같은 left 위치 */
+  top: 320px;         /* bubble-left와 같은 top 위치 */
+  transform: translateY(-50%);
+}
+
+/* 오른쪽 점 - bubble-right와 연결될 예정 */
+.point-right {
+  left: 800px;     /* bubble-right와 같은 right 위치 (현재 right: 100px) */
+  top: 406px;         /* bubble-right와 같은 top 위치 */
+  transform: translateY(-50%);
+}
+
+/* ============================================
+   연결선 스타일
+   ============================================ */
+
+.connection-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 왼쪽 연결선 - bubble-left와 point-left 연결 */
+.connection-left {
+  /* bubble-left: left: 40px, max-width: 500px, top: 50% */
+  /* 말풍선 오른쪽 끝: 40px + 500px = 540px */
+  /* point-left: left: 480px, top: 44% */
+  /* 실제로는 point-left가 더 왼쪽에 있지만, 가로선을 먼저 그리고 대각선으로 연결 */
+  left: 320px; /* bubble-left의 오른쪽 끝에서 시작 */
+  top: 370px;
+  width: 200px; /* 가로선 + 대각선 영역 */
+  height: 300px;
+  transform: translateY(-50%);
+  margin-top: -150px; /* 세로 중앙 조정 */
+}
+
+/* 상단 연결선 - bubble-top과 point-top 연결 */
+.connection-top {
+  /* bubble-top: top: 40px, left: 70%, max-width: 480px */
+  /* 말풍선 아래쪽 끝: top: 40px + 말풍선 높이 */
+  /* point-top: top: 300px, left: 51% */
+  left: 70%;
+  top: 40px;
+  width: 300px;
+  height: 400px;
+  transform: translateX(-50%);
+  margin-left: -150px; /* 가로 중앙 조정 */
+}
+
+/* 오른쪽 연결선 - bubble-right와 point-right 연결 */
+.connection-right {
+  /* bubble-right: right: 40px, top: 81%, max-width: 480px */
+  /* 말풍선 왼쪽 끝: 화면 오른쪽에서 40px + 480px = 520px 떨어진 곳 */
+  /* point-right: right: 380px, top: 393px */
+  /* connection-left와 같은 방식으로, 말풍선 왼쪽 끝에서 시작 */
+  /* left를 사용하여 connection-left와 동일한 방식으로 설정 */
+  left: 788px; /* bubble-right의 왼쪽 끝에서 시작 */
+  top: 393px;
+  width: 200px; /* connection-left와 동일 */
+  height: 300px; /* connection-left와 동일 */
+  transform: translateY(50%);
+  margin-top: -150px; /* connection-left와 동일 */
+}
+
+/* ============================================
+   말풍선 위치 조정
+   각 말풍선의 위치를 여기서 미세조정할 수 있습니다.
+   ============================================ */
+
+/* 소스 선택 말풍선 - 상단 */
+.bubble-top {
+  position: absolute;
+  top: 38px;        /* 상단에서의 거리 (px 단위로 조정) */
+  left: 70%;        /* 좌우 중앙 정렬 */
+  transform: translateX(-50%);  /* 중앙 정렬을 위한 transform */
+  /* 직접 위치 지정하려면: left: 100px; transform: none; */
+}
+
+/* 필요사항 말풍선 - 왼쪽 */
+.bubble-left {
+  position: absolute;
+  left: 40px;       /* 왼쪽에서의 거리 (px 단위로 조정) */
+  top: 380px;         /* 상하 중앙 정렬 */
+  transform: translateY(-50%);  /* 중앙 정렬을 위한 transform */
+  /* 직접 위치 지정하려면: top: 200px; transform: none; */
+}
+
+/* 직무 선택 말풍선 - 오른쪽 */
+.bubble-right {
+  position: absolute;
+  right:40px;      /* 오른쪽에서의 거리 (px 단위로 조정) */
+  top: 625px;         /* 상하 중앙 정렬 */
+  transform: translateY(-50%);  /* 중앙 정렬을 위한 transform */
+  /* 직접 위치 지정하려면: top: 200px; transform: none; */
+}
+
+/* Responsive - 모바일 */
+@media (max-width: 768px) {
+  .bubble {
+    max-width: 100%;
+    margin: 15px;
+    padding: 24px; /* 20px -> 24px (20% 증가) */
+  }
+  
+  .bubble-top {
+    top: 20px;
+    left: 10%;
+    transform: translateX(-50%);
+  }
+  
+  .bubble-left {
+    left: 20px;
+    top: auto;
+    bottom: 20px;
+    transform: none;
+  }
+  
+  .bubble-right {
+    right: 10px;
+    top: auto;
+    bottom: 20px;
+    transform: none;
+  }
+}
+

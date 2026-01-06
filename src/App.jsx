@@ -29,8 +29,8 @@ function App() {
     console.log(form)
     setIsLoading(true)
     try {
-      const response = await submitForm(form);
       await turnOn();
+      const response = await submitForm(form);
       if (response.status === 'success') {
         alert('WAYO에게 양식이 제출되었습니다.');
         /* turnOff API 호출 */

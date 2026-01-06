@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Bubble.css'
 import { PositionLabels } from '../constants/positionEnum'
 
-function PositionBubble({ onChange, className = '' }) {
-  const [selectedPosition, setSelectedPosition] = useState(null)
+function PositionBubble({ value = null, onChange, className = '' }) {
+  const [selectedPosition, setSelectedPosition] = useState(value)
+
+  // formData가 변경되면 내부 state도 동기화
+  useEffect(() => {
+    setSelectedPosition(value)
+  }, [value])
 
   const handlePositionChange = (positionValue) => {
     setSelectedPosition(positionValue)

@@ -1,8 +1,13 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Bubble.css'
 
-function NeedBubble({ onChange, className = '' }) {
-  const [need, setNeed] = useState('')
+function NeedBubble({ value = '', onChange, className = '' }) {
+  const [need, setNeed] = useState(value)
+
+  // formData가 변경되면 내부 state도 동기화
+  useEffect(() => {
+    setNeed(value)
+  }, [value])
 
   const handleNeedChange = (e) => {
     const value = e.target.value

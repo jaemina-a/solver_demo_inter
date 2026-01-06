@@ -13,6 +13,7 @@ function App() {
     needs: ''
   })
   const [isLoading, setIsLoading] = useState(false)
+
   const handleSourceChange = (sources) => {
     setFormData(prev => ({ ...prev, source: sources }))
   }
@@ -33,12 +34,6 @@ function App() {
       
       // 2. submitForm() 호출
       const response = await submitForm(form);
-      setFormData({
-        source: [],
-        position: null,
-        needs: ''
-      });
-      console.log(formData)
       
       // 3. submitForm 응답이 오면 turnOff() 호출
       try {
@@ -73,9 +68,9 @@ function App() {
 
   return (
     <div className="app-container">
-      <SourceBubble onChange={handleSourceChange} className="bubble-top" />
-      <NeedBubble onChange={handleNeedChange} className="bubble-left" />
-      <PositionBubble onChange={handlePositionChange} className="bubble-right" />
+      <SourceBubble value={formData.source} onChange={handleSourceChange} className="bubble-top" />
+      <NeedBubble value={formData.needs} onChange={handleNeedChange} className="bubble-left" />
+      <PositionBubble value={formData.position} onChange={handlePositionChange} className="bubble-right" />
       
       {/* 연결될 점들 */}
       <div className="point point-top"></div>

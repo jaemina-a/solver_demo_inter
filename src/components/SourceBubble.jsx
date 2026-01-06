@@ -1,9 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Bubble.css'
 import { SourceEnum } from '../constants/sourceEnum'
 
-function SourceBubble({ onChange, className = '' }) {
-  const [selectedSources, setSelectedSources] = useState([])
+function SourceBubble({ value = [], onChange, className = '' }) {
+  const [selectedSources, setSelectedSources] = useState(value)
+
+  // formData가 변경되면 내부 state도 동기화
+  useEffect(() => {
+    setSelectedSources(value)
+  }, [value])
 
   const handleSourceChange = (sourceValue) => {
     let newSources

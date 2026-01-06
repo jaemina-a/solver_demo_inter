@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import SourceBubble from './components/SourceBubble'
 import PositionBubble from './components/PositionBubble'
@@ -13,6 +13,31 @@ function App() {
     needs: ''
   })
   const [isLoading, setIsLoading] = useState(false)
+
+  // 엔터 키로 버튼 클릭 처리
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // 엔터 키를 눌렀고, 로딩 중이 아니며, 포커스가 input/textarea/select가 아닐 때
+      if (event.key === 'Enter' && !isLoading) {
+        const activeElement = document.activeElement
+        const isInputFocused = activeElement.tagName === 'INPUT' || 
+                               activeElement.tagName === 'TEXTAREA' || 
+                               activeElement.tagName === 'SELECT'
+        
+        // input/textarea/select에 포커스가 있으면 기본 동작 허용 (폼 내부에서 엔터 입력)
+        // 그 외의 경우에만 버튼 클릭
+        if (!isInputFocused) {
+          event.preventDefault()
+          handleButtonClick(formData)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyPress)
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress)
+    }
+  }, [isLoading, formData])
 
   const handleSourceChange = (sources) => {
     setFormData(prev => ({ ...prev, source: sources }))
@@ -46,6 +71,12 @@ function App() {
       // 4. submitForm 결과에 따른 처리
       if (response.status === 'success') {
         alert('WAYO에게 양식이 제출되었습니다.');
+        // 폼 초기화
+        setFormData({
+          source: [],
+          position: null,
+          needs: ''
+        });
       } else {
         const errorMsg = response.msg || `서버 응답 오류: status=${response.status}, code=${response.code}`;
         console.error('폼 제출 실패:', errorMsg);

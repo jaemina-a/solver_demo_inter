@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import SourceBubble from './components/SourceBubble'
 import PositionBubble from './components/PositionBubble'
@@ -13,32 +13,6 @@ function App() {
     needs: ''
   })
   const [isLoading, setIsLoading] = useState(false)
-
-  // 엔터 키로 버튼 클릭 처리
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      // 엔터 키를 눌렀고, 로딩 중이 아니며, 포커스가 input/textarea/select가 아닐 때
-      if (event.key === 'Enter' && !isLoading) {
-        const activeElement = document.activeElement
-        const isInputFocused = activeElement.tagName === 'INPUT' || 
-                               activeElement.tagName === 'TEXTAREA' || 
-                               activeElement.tagName === 'SELECT'
-        
-        // input/textarea/select에 포커스가 있으면 기본 동작 허용 (폼 내부에서 엔터 입력)
-        // 그 외의 경우에만 버튼 클릭
-        if (!isInputFocused) {
-          event.preventDefault()
-          handleButtonClick(formData)
-        }
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyPress)
-    return () => {
-      window.removeEventListener('keydown', handleKeyPress)
-    }
-  }, [isLoading, formData])
-
   const handleSourceChange = (sources) => {
     setFormData(prev => ({ ...prev, source: sources }))
   }
@@ -59,6 +33,12 @@ function App() {
       
       // 2. submitForm() 호출
       const response = await submitForm(form);
+      setFormData({
+        source: [],
+        position: null,
+        needs: ''
+      });
+      console.log(formData)
       
       // 3. submitForm 응답이 오면 turnOff() 호출
       try {

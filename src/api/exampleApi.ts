@@ -8,7 +8,7 @@ export interface TurnOnResponse {
 
 export const turnOn = async (): Promise<TurnOnResponse> => {
   try {
-    const response = await fetch('http://192.168.0.102:5000/turnon', {
+    const response = await fetch('https://192.168.0.102/turnon', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

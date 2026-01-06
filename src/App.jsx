@@ -37,6 +37,7 @@ function App() {
         try {
           const turnOffResponse = await turnOff();
           console.log('turnOff 응답:', turnOffResponse);
+          alert('WAYO가 끄였습니다.');
         } catch (turnOffError) {
           console.error('turnOff API 호출 오류:', turnOffError);
         }

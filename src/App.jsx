@@ -30,15 +30,15 @@ function App() {
     setIsLoading(true)
     try {
       const response = await submitForm(form);
+      await turnOn();
       if (response.status === 'success') {
-        alert('선택이 완료되었습니다. WAYO에게 양식이 제출되었습니다.');
-        /* turnOn API 호출 */
+        alert('WAYO에게 양식이 제출되었습니다.');
+        /* turnOff API 호출 */
         try {
-          const turnOnResponse = await turnOn();
-          console.log('turnOn 응답:', turnOnResponse);
-        } catch (turnOnError) {
-          console.error('turnOn API 호출 오류:', turnOnError);
-          // turnOn 실패해도 사용자에게는 알리지 않음 (선택적)
+          const turnOffResponse = await turnOff();
+          console.log('turnOff 응답:', turnOffResponse);
+        } catch (turnOffError) {
+          console.error('turnOff API 호출 오류:', turnOffError);
         }
       } else {
         const errorMsg = response.msg || `서버 응답 오류: status=${response.status}, code=${response.code}`;

@@ -26,19 +26,19 @@
   padding: 16px 48px;
   font-size: 1.1rem;
   font-weight: 600;
-  color: white;
-  background-color: #ffc107; /* point 색상과 동일한 노란색 */
+  color: #000000; /* 검은색 */
+  background-color: #fff9c4; /* 채도를 낮춘 노란색에 흰색을 섞은 색상 */
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 249, 196, 0.3);
   transition: all 0.3s ease;
   z-index: 100;
 }
 
 .submit-button:hover {
-  background-color: #ffb300; /* 더 어두운 노란색 */
-  box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+  background-color: #fff59d; /* 호버 시 약간 더 진한 노란색 */
+  box-shadow: 0 6px 16px rgba(255, 245, 157, 0.4);
   transform: translateX(-50%) translateY(-2px);
 }
 

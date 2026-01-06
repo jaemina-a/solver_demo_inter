@@ -3,7 +3,7 @@ import './App.css'
 import SourceBubble from './components/SourceBubble'
 import PositionBubble from './components/PositionBubble'
 import NeedBubble from './components/NeedBubble'
-import { turnOn } from './api/exampleApi'
+import { turnOn, turnOff } from './api/exampleApi'
 import { submitForm } from './api/formApi'
 
 function App() {
@@ -29,19 +29,23 @@ function App() {
     console.log(form)
     setIsLoading(true)
     try {
+      // 1. turnOn() 먼저 호출
       await turnOn();
+      
+      // 2. submitForm() 호출
       const response = await submitForm(form);
+      
+      // 3. submitForm 응답이 오면 turnOff() 호출
+      try {
+        const turnOffResponse = await turnOff();
+        console.log('turnOff 응답:', turnOffResponse);
+      } catch (turnOffError) {
+        console.error('turnOff API 호출 오류:', turnOffError);
+      }
+      
+      // 4. submitForm 결과에 따른 처리
       if (response.status === 'success') {
         alert('WAYO에게 양식이 제출되었습니다.');
-        /* turnOff API 호출 */
-        try {
-          alert('turnoff API호출!!');
-          const turnOffResponse = await turnOff();
-          console.log('turnOff 응답:', turnOffResponse);
-          alert('WAYO가 끄였습니다.');
-        } catch (turnOffError) {
-          console.error('turnOff API 호출 오류:', turnOffError);
-        }
       } else {
         const errorMsg = response.msg || `서버 응답 오류: status=${response.status}, code=${response.code}`;
         console.error('폼 제출 실패:', errorMsg);

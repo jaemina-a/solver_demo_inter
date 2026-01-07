@@ -42,6 +42,7 @@ export const turnOff = async (): Promise<any> => {
         'Content-Type': 'application/json',
       },
     });
+    console.log("d")
 
     const data = await response.json();
     console.log('turnOff data:', data);
